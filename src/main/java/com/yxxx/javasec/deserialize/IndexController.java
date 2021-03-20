@@ -18,7 +18,7 @@ public class IndexController {
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
         String name = objectInputStream.readUTF();
         int year = objectInputStream.readInt();
-        if (name == "SJTU" && year == 1896){
+        if (name.equals("SJTU") && year == 1896){
             objectInputStream.readObject();
         }
         return "index";
