@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.math.BigInteger;
 
 @Controller
 public class IndexController {
     @RequestMapping("/basic")
     public String greeting(@RequestParam(name="data", required=true) String data, Model model) throws Exception {
-        byte[] b = new BigInteger(data,16).toByteArray();
+        byte[] b = Utils.hexStringToBytes(data);
         InputStream inputStream = new ByteArrayInputStream(b);
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
         objectInputStream.readObject();
