@@ -16,7 +16,11 @@ public class IndexController {
         byte[] b = Utils.hexStringToBytes(data);
         InputStream inputStream = new ByteArrayInputStream(b);
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-        objectInputStream.readObject();
+        String name = objectInputStream.readUTF();
+        int year = objectInputStream.readInt();
+        if (name == "SJTU" && year == 1896){
+            objectInputStream.readObject();
+        }
         return "index";
     }
 }
