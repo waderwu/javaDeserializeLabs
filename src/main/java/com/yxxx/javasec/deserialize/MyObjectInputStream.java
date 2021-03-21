@@ -7,11 +7,12 @@ import java.io.ObjectStreamClass;
 import java.util.ArrayList;
 
 public class MyObjectInputStream extends ObjectInputStream {
-    private static ArrayList<String> blackList = new ArrayList<>();
+    private static ArrayList<String> classBlackList = new ArrayList<>();
+    private static ArrayList<String> proxyBlackList = new ArrayList<>();
 
     static {
-        blackList.add("org.apache.commons.collections.functors");
-        blackList.add("java.rmi.server");
+        classBlackList.add("org.apache.commons.collections.functors");
+        proxyBlackList.add("java.rmi.registry");
     }
 
     public MyObjectInputStream(InputStream inputStream)throws Exception{
@@ -20,7 +21,7 @@ public class MyObjectInputStream extends ObjectInputStream {
 
     @Override
     protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
-        for (String s : blackList) {
+        for (String s : classBlackList) {
             if (desc.getName().contains(s)){
                 throw new ClassNotFoundException("go out!");
             }
@@ -30,6 +31,13 @@ public class MyObjectInputStream extends ObjectInputStream {
 
     @Override
     protected Class<?> resolveProxyClass(String[] interfaces) throws IOException, ClassNotFoundException {
+        for (String s : classBlackList) {
+            for (String anInterface : interfaces) {
+                if (anInterface.contains(s)){
+                    throw new ClassNotFoundException("go out!");
+                }
+            }
+        }
         return super.resolveProxyClass(interfaces);
     }
 }
