@@ -1,0 +1,27 @@
+version: '2.4'
+services:
+  nginx:
+    image: nginx:1.15
+    ports:
+      - "0.0.0.0:40061:80"
+    restart: always
+    volumes:
+        - ./default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - internal_network
+      - out_network
+  web:
+    build: ./
+    restart: always
+    networks:
+      - internal_network
+networks:
+    internal_network:
+        internal: true
+        ipam:
+            driver: default
+    out_network:
+        driver_opts:
+            com.docker.network.driver.mtu: 1400
+        ipam:
+            driver: default
