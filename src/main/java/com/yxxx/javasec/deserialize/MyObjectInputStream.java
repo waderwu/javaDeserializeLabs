@@ -12,6 +12,8 @@ public class MyObjectInputStream extends ObjectInputStream {
 
     static {
         classBlackList.add("org.apache.commons.collections.functors");
+        classBlackList.add("sun.rmi.server.UnicastRef");
+        classBlackList.add("java.rmi.server.RemoteObjectInvocationHandler");
         proxyBlackList.add("java.rmi.registry");
     }
 
