@@ -15,7 +15,7 @@ public class IndexController {
     public String greeting(@RequestParam(name="data", required=true) String data, Model model) throws Exception {
         byte[] b = Utils.hexStringToBytes(data);
         InputStream inputStream = new ByteArrayInputStream(b);
-        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+        ObjectInputStream objectInputStream = new MyObjectInputStream(inputStream);
         String name = objectInputStream.readUTF();
         int year = objectInputStream.readInt();
         if (name.equals("SJTU") && year == 1896){
