@@ -33,7 +33,7 @@ public class MyObjectInputStream extends ObjectInputStream {
 
     @Override
     protected Class<?> resolveProxyClass(String[] interfaces) throws IOException, ClassNotFoundException {
-        for (String s : classBlackList) {
+        for (String s : proxyBlackList) {
             for (String anInterface : interfaces) {
                 if (anInterface.contains(s)){
                     throw new ClassNotFoundException("go out!");
