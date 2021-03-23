@@ -1,4 +1,4 @@
-From openjdk:8u265-slim
+From openjdk:8u222-slim
 
 RUN apt-get update -y \
     && apt-get install curl -y \
