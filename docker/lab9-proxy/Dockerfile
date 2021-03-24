@@ -5,7 +5,7 @@ RUN apt-get update -y \
     && useradd ctf \
     && mkdir /opt/app
 
-COPY lab1-basic.jar /opt/app
+COPY lab9-proxy.jar /opt/app
 COPY flag /flag
 
 WORKDIR /opt/app
@@ -13,4 +13,4 @@ WORKDIR /opt/app
 EXPOSE 8080
 
 USER ctf
-CMD ["java", "-jar", "/opt/app/lab1-basic.jar"]
+CMD ["java", "-jar", "/opt/app/lab9-proxy.jar"]
