@@ -1,0 +1,7 @@
+version: '2.4'
+services:
+  lab1-basic:
+    build: ./
+    ports:
+      - "0.0.0.0:40058:8080"
+    restart: always
